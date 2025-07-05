@@ -121,7 +121,6 @@ python SARSA1.py
 - Extend sentiment sources (e.g., Reddit, Twitter)
 - Upgrade RL agent to Deep Q-Network (DQN) or PPO
 - Add portfolio management for multi-asset trading
-- Streamlit dashboard for real-time monitoring
 
 ---
 
