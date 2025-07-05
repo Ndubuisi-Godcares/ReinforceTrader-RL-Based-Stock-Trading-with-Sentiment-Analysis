@@ -1,65 +1,69 @@
 # AI Sentiment Stock Market Trader
 
-### Developed by:
-- **Ndubuisi Godcares Chibuokem** (21070126124)
-- **Najeeb Saiyed** (21070126057)
+An AI-powered trading system that integrates **Reinforcement Learning (SARSA)** with **financial news sentiment analysis** to automate stock trading. Built with real-time data ingestion, backtesting, and live execution using the **Alpaca trading API**, this solution demonstrates an end-to-end ML pipeline for intelligent trading strategies.
 
-## Project Overview
-The **AI Sentiment Stock Market Trader** is an AI-powered trading bot that automates stock market trades by combining reinforcement learning with sentiment analysis. The bot utilizes real-time market data and sentiment analysis of news articles to make dynamic trading decisions aimed at maximizing returns while managing risk.
+---
 
-**GitHub Repository**: [AI Sentiment Stock Market Trader](https://github.com/iamzayd/AI-Sentiment-Stock-Market-Trader)
+## 👤 Authors
 
-## Key Features
-- **Reinforcement Learning (SARSA Algorithm)**: The SARSA algorithm dynamically decides whether to buy, sell, or hold stocks based on market conditions and sentiment analysis.
-- **Sentiment Analysis**: Integrates the FinBERT model to analyze sentiment from news articles related to specific stocks.
-- **Risk Management**: Implements position sizing and stop-loss strategies to protect against excessive losses.
-- **Backtesting**: Provides the capability to backtest strategies using historical data from Yahoo Finance.
-- **Automated Trading**: Connects to Alpaca's API to execute trades automatically based on the SARSA model's decisions and sentiment analysis.
+- **Ndubuisi Godcares Chibuokem**  
+- **Najeeb Saiyed**
 
-## Architecture Overview
-The architecture of the AI Sentiment Stock Market Trader consists of the following components:
+---
 
-- **Data Layer**: 
-  - Fetches market data from Alpaca API.
-  - Uses the FinBERT model to analyze sentiment from news articles related to specific stock symbols (e.g., SPY).
-  
-- **Algorithm Layer**: 
-  - Implements the SARSA reinforcement learning algorithm to dynamically update the Q-table and guide trading decisions.
-  - Analyzes news sentiment to refine trading strategies.
-  
-- **Execution Layer**: Executes trading decisions (buy, sell, or hold) using Alpaca’s API.
+## 🧠 Overview
 
-- **Backtesting Layer**: Backtests strategies using historical market data from Yahoo Finance to evaluate performance before live trading.
+This project implements a sentiment-aware trading bot that:
+
+- Analyzes financial news using [FinBERT](https://arxiv.org/abs/2006.08097#:~:text=In%20this%20work%2Cwe%20address%20the%20need%20by%20pretraining,advantage%20of%20FinBERT%20over%20generic%20domain%20BERT%20model.) to gauge sentiment on stock-related news.
+- Uses a **SARSA (State-Action-Reward-State-Action)** algorithm to learn optimal buy/sell/hold strategies.
+- Integrates with **Alpaca Markets API** to fetch real-time stock prices and execute trades.
+- Leverages **QuantStats** for strategy performance evaluation via historical backtesting.
+
+---
+
+## 📦 Features
+
+- **Reinforcement Learning**: SARSA-based RL agent adapts trading strategies from reward feedback.
+- **Sentiment Analysis**: Real-time classification of financial news using FinBERT.
+- **Backtesting Engine**: Simulates performance using historical data (via Yahoo Finance).
+- **Risk Management**: Includes position sizing, stop-loss, and take-profit mechanisms.
+- **Live Trading Support**: Executes trades securely through Alpaca.
+
+---
+
+## 🧱 System Architecture
 
 ![diagram-export-9-30-2024-7_56_33-PM](https://github.com/user-attachments/assets/2d03325f-891e-4a48-ae69-d7adaec90c41)
-
-## Model Highlights
-- **Increased Profitability**: Backtesting results demonstrate a cumulative return of 234% over four years, with an average of 1% profit per trade.
-- **Adaptability**: The SARSA model adjusts to changing market conditions, utilizing both market data and sentiment analysis for more efficient trading.
-- **Sentiment-Driven Decisions**: Analyzing sentiment from news articles (via FinBERT) helps predict stock price movements, improving decision-making accuracy.
-
-## How It Works
-
-1. **Sentiment Analysis**: 
-   - The **news_classified.py** script fetches news articles from Alpaca’s API and analyzes them using FinBERT to classify their sentiment as positive, negative, or neutral.
-   
-2. **Reinforcement Learning (SARSA Algorithm)**:
-   - The **SARSA1.py** script implements a SARSA-based trading strategy that evaluates market conditions and sentiment to make buy, sell, or hold decisions.
-   - The Q-table is updated based on state-action-reward transitions as new market data and sentiment are gathered.
-
-3. **Trading Execution**: 
-   - Based on the SARSA model’s decisions, trades are executed via Alpaca’s API. The model also incorporates stop-loss and take-profit strategies to manage risks.
-
-4. **Backtesting**: 
-   - Backtesting is performed on historical data using Yahoo Finance to validate the strategy's effectiveness over time.
-
-## Installation and Setup
-
-### Clone the Repository:
 ```
+
+## 📈 Backtesting Results
+
+Backtested on historical data from **2020 to 2024**, benchmarked against the S&P 500 (SPY):
+
+| Metric                    | Value     |
+|--------------------------|-----------|
+| Cumulative Return        | 80.81%    |
+| SPY Benchmark Return     | 79.08%     |
+| Annualized Return (CAGR) | 9.35%%     |
+| Sharpe Ratio             | 0.47      |
+| Max Drawdown             | -27.06%    |
+
+> Detailed performance reports generated using **QuantStats**.
+
+---
+
+## 🛠 Setup & Installation
+
+```bash
 git clone https://github.com/iamzayd/AI-Sentiment-Stock-Market-Trader.git
 cd AI-Sentiment-Stock-Market-Trader
+pip install -r requirements.txt
 ```
+
+### Configure API Credentials
+
+Create an account at [Alpaca](https://alpaca.markets/) and add your keys to `config.py`:
 
 ## API Keys
 
@@ -70,26 +74,61 @@ cd AI-Sentiment-Stock-Market-Trader
    Make sure to update the API credentials in both scripts:
    - **news_classified.py**: Insert your API key and secret for fetching news.
    - **SARSA1.py**: Insert your API key and secret for executing trades.
+```python
+ALPACA_API_KEY = 'your-api-key'
+ALPACA_SECRET_KEY = 'your-secret-key'
+```
 
+---
 
-## Run the Bot
-### For Sentiment Analysis:
+## ▶️ Usage
 
-``` python news_classified.py```
+### 1. Run Sentiment Classifier
+```bash
+python news_classified.py
+```
 
-### For Running the SARSA Trading Bot:
+### 2. Run SARSA Agent
+```bash
+python SARSA1.py
+```
 
-```python SARSA1.py```
+---
 
+## 📂 Repository Structure
 
-## Usage
+```bash
+.
+├── news_classified.py       # News sentiment classification with FinBERT
+├── SARSA1.py                # Reinforcement Learning SARSA trading logic
+├── backtest.py              # Backtest engine for historical simulation
+├── config.py                # API credentials and config
+├── requirements.txt         # Project dependencies
+├── tearsheet.html           # QuantStats report
+└── README.md                # Project documentation
+```
 
-- **news_classified.py**: This script fetches news articles and classifies their sentiment using the FinBERT model. The results can be used to guide trading strategies.
-- **SARSA1.py**: This script runs the SARSA trading bot, which automatically fetches market and sentiment data, makes trading decisions, and executes trades based on a predefined risk tolerance.
+---
+## 📈 Strategy Performance
 
-## Future Enhancements
+### ✅ Cumulative Return vs. SPY Benchmark
+![image](https://github.com/user-attachments/assets/3bf10715-bb39-47a7-8daf-a4c90c1a0be4)
 
-- **Additional Sentiment Sources**: Extend sentiment analysis to include data from social media platforms (e.g., Twitter).
-- **Strategy Diversification**: Support for trading a wider range of stocks and other financial instruments.
-- **Improved Risk Management**: Implement advanced strategies such as volatility-based position sizing and dynamic stop-loss thresholds.
+--- 
 
+## 📌 Future Enhancements
+
+- Extend sentiment sources (e.g., Reddit, Twitter)
+- Upgrade RL agent to Deep Q-Network (DQN) or PPO
+- Add portfolio management for multi-asset trading
+- Streamlit dashboard for real-time monitoring
+
+---
+
+## 🙏 Acknowledgements
+
+- [FinBERT by Prosus AI](https://github.com/ProsusAI/finBERT)
+- [Alpaca Markets](https://alpaca.markets/)
+- [QuantStats](https://github.com/ranaroussi/quantstats)
+
+---
