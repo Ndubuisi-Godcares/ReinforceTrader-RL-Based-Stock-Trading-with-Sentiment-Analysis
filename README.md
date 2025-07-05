@@ -4,7 +4,7 @@ An AI-powered trading system that integrates **Reinforcement Learning (SARSA)** 
 
 ---
 
-## 👤 Authors
+## Developers:
 
 - **Ndubuisi Godcares Chibuokem**  
 - **Najeeb Saiyed**
